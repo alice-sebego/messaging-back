@@ -40,4 +40,10 @@ export class UserController {
   ): Promise<IUser> {
     return await this.userService.updateUser(userId, updatedUser);
   }
+
+  @Get(':userId')
+  async getUserById(@Param('userId') userId: string): Promise<IUser> {
+    return await this.userService.getUserById(userId);
+  }
+
 }

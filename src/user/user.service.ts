@@ -57,6 +57,14 @@ export class UserService {
     return await this.userModel.find().exec();
   }
 
+  async getUserById(userId: string): Promise<IUser> {
+    const user = await this.userModel.findById(userId).exec();
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
+  }
+
   async updateUser(userId: string, updatedUser: IUser): Promise<IUser> {
     const user = await this.userModel.findByIdAndUpdate(userId, updatedUser, {
       new: true,
