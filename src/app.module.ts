@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { MessageService } from './message/message.service';
+import { MessageController } from './message/message.controller';
 import 'dotenv/config';
 
 @Module({
@@ -10,7 +12,7 @@ import 'dotenv/config';
     MongooseModule.forRoot(process.env.DATABASE_URL),
     UserModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, MessageController],
+  providers: [AppService, MessageService],
 })
 export class AppModule {}
