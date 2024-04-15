@@ -7,5 +7,21 @@ import { IMessage } from './Model/message';
 export class MessageService {
     constructor(@InjectModel('Message') private readonly messageModel: Model<IMessage>) {}
 
+    async getMessages(): Promise<IMessage[]> {
+        return await this.messageModel.find().exec();
+    }
     
+    async createMessage(message: IMessage): Promise<IMessage>  {
+        const createdMessage = new this.messageModel(message);
+        return await createdMessage.save();
+    }
+
+    async deleteMessage(id: string) :Promise<IMessage> {
+       return await this.messageModel.findByIdAndDelete(id);
+    }
+
+    // async getMessagesByUser(userId: string): Promise<IMessage[]> {
+    //     return await this.messageModel.find({ sender: _id}).populate( "sender receiver").populate("receiver").exec();
+    // }
+
 }
