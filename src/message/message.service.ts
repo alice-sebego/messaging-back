@@ -20,8 +20,11 @@ export class MessageService {
        return await this.messageModel.findByIdAndDelete(id);
     }
 
-    // async getMessagesByUser(userId: string): Promise<IMessage[]> {
-    //     return await this.messageModel.find({ sender: _id}).populate( "sender receiver").populate("receiver").exec();
-    // }
+    async getMessagesByUser(userId: string): Promise<IMessage[]> {
+        //return await this.messageModel.find({ sender: userId}).populate( "sender receiver").populate("receiver").exec();
+        return await this.messageModel
+          .find({ $or: [{ senderId: userId }, { receiverId: userId }] })
+          .exec();
+    }
 
 }

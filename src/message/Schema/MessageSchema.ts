@@ -13,18 +13,12 @@ export const MessageSchema: Schema = new Schema({
     type: Date,
     default: Date.now,
   },
-  sender: {
-    type: {
-      _id: String,
-      username: String,
-    },
+  senderId: {
+    type: String,
     required: true,
   },
-  receiver: {
-    type: {
-      _id: String,
-      username: String,
-    },
+  receiverId: {
+    type: String,
     required: true,
   },
 });
