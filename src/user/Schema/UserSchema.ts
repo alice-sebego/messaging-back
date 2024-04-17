@@ -21,4 +21,8 @@ export const UserSchema: Schema = new Schema({
     type: [String],
     default: [],
   },
+  picture: {
+    type: String,
+    default: ''
+  }
 });

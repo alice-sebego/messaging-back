@@ -7,6 +7,7 @@ export interface IUser {
   connected: boolean;
   role: string;
   messages: string[];
+  picture: string;
 
   comparePassword(password: string): Promise<boolean>;
 }
