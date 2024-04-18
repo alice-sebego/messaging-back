@@ -4,9 +4,7 @@ import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
-    MulterModule.register({
-      dest: './files'
-    }),
+    MulterModule.register(),
   ],
   controllers: [FileController]
 })
