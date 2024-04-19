@@ -1,7 +1,5 @@
 import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { IFile } from './Model/file';
-import {ImgurApiResponse, ImgurClient } from 'imgur';
 import axios from 'axios';
 
 
@@ -28,8 +26,10 @@ export class FileController {
       }
       const imageData = new FormData();
 
-      
-      imageData.append('image', file.buffer.toString("binary"));
+      const blob = new Blob([file.buffer], { type: file.mimetype });
+
+      imageData.append('image', blob);
+      imageData.append('title', file.originalname);
       
       const response = await axios.post(
         'https://api.imgur.com/3/image',
@@ -37,7 +37,7 @@ export class FileController {
         {
           headers: {
             Authorization: `Client-ID ${process.env.CLIENT_ID}`,
-            'Content-Type': "multipart/form-data",
+            //'Content-Type': "multipart/form-data",
           },
         },
       );
